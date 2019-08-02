@@ -54,37 +54,9 @@ class PredisCache extends BasePredisCache
     /**
      * {@inheritdoc}
      */
-    protected function doSave($id, $data, $lifetime = 0): bool
-    {
-        if (0 === $lifetime && 0 !== $this->defaultLifeTime) {
-            $ttl = $this->defaultLifeTime;
-        } else {
-            $ttl = $lifetime;
-        }
-
-        return parent::doSave($this->getModifiedKeyWithMigrationPrefix($id), $data, $ttl);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function doFetchMultiple(array $keys): array
     {
         return parent::doFetchMultiple($this->getModifiedKeysWithMigrationPrefix($keys));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function doSaveMultiple(array $keysAndValues, $lifetime = 0): bool
-    {
-        if (0 === $lifetime && 0 !== $this->defaultLifeTime) {
-            $ttl = $this->defaultLifeTime;
-        } else {
-            $ttl = $lifetime;
-        }
-
-        return parent::doSaveMultiple($this->getModifiedKeysAndValuesWithMigrationPrefix($keysAndValues), $ttl);
     }
 
     /**
@@ -109,6 +81,34 @@ class PredisCache extends BasePredisCache
     protected function doDeleteMultiple(array $keys): bool
     {
         return parent::doDeleteMultiple($this->getModifiedKeysWithMigrationPrefix($keys));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doSave($id, $data, $lifetime = 0): bool
+    {
+        if (0 === $lifetime && 0 !== $this->defaultLifeTime) {
+            $ttl = $this->defaultLifeTime;
+        } else {
+            $ttl = $lifetime;
+        }
+
+        return parent::doSave($this->getModifiedKeyWithMigrationPrefix($id), $data, $ttl);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doSaveMultiple(array $keysAndValues, $lifetime = 0): bool
+    {
+        if (0 === $lifetime && 0 !== $this->defaultLifeTime) {
+            $ttl = $this->defaultLifeTime;
+        } else {
+            $ttl = $lifetime;
+        }
+
+        return parent::doSaveMultiple($this->getModifiedKeysAndValuesWithMigrationPrefix($keysAndValues), $ttl);
     }
 
     /**

@@ -232,6 +232,6 @@ final class PredisCacheTest extends TestCase
             )
         ;
 
-        $this->predisCache->doSaveMultiple(['testA' => 'valueA', 'testB' => 'valueB'], 111);
+        $this->predisCache->doSaveMultiple(['testA' => 'valueA', 'testB' => 'valueB']);
     }
 }
