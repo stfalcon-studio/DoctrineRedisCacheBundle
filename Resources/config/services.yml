@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $migrationDirectory: "%doctrine_migrations.dir_name%"
+
+    StfalconStudio\DoctrineRedisCacheBundle\:
+        resource: '../src/{Service}/'
+
+    Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface:
+        class: Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder
+
