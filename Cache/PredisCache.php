@@ -2,7 +2,7 @@
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
- * (c) Artem Henvald <genvaldartem@gmail.com>
+ * (c) Stfalcon Studio <stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,10 +18,13 @@ use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionSe
 
 /**
  * PredisCache.
+ *
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 class PredisCache extends BasePredisCache
 {
     private $migrationVersionService;
+
     private $defaultLifeTime;
 
     /** @var string|null */
@@ -51,12 +54,12 @@ class PredisCache extends BasePredisCache
     /**
      * {@inheritdoc}
      */
-    protected function doSave($id, $data, $lifeTime = 0): bool
+    protected function doSave($id, $data, $lifetime = 0): bool
     {
-        if (0 === $lifeTime && 0 !== $this->defaultLifeTime) {
+        if (0 === $lifetime && 0 !== $this->defaultLifeTime) {
             $ttl = $this->defaultLifeTime;
         } else {
-            $ttl = $lifeTime;
+            $ttl = $lifetime;
         }
 
         return parent::doSave($this->getModifiedKeyWithMigrationPrefix($id), $data, $ttl);
@@ -75,7 +78,13 @@ class PredisCache extends BasePredisCache
      */
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0): bool
     {
-        return parent::doSaveMultiple($this->getModifiedKeysAndValuesWithMigrationPrefix($keysAndValues), $lifetime);
+        if (0 === $lifetime && 0 !== $this->defaultLifeTime) {
+            $ttl = $this->defaultLifeTime;
+        } else {
+            $ttl = $lifetime;
+        }
+
+        return parent::doSaveMultiple($this->getModifiedKeysAndValuesWithMigrationPrefix($keysAndValues), $ttl);
     }
 
     /**

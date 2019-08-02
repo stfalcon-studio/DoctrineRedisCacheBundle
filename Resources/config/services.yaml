@@ -6,8 +6,8 @@ services:
         bind:
             $migrationDirectory: "%doctrine_migrations.dir_name%"
 
-    StfalconStudio\DoctrineRedisCacheBundle\:
-        resource: '../src/{Service}/'
+    StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService:
+        class: StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService
 
     Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface:
         class: Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder

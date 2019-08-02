@@ -2,7 +2,7 @@
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
- * (c) Artem Henvald <genvaldartem@gmail.com>
+ * (c) Stfalcon Studio <stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
 
+/**
+ * MigrationVersionServiceTest.
+ *
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ */
 final class MigrationVersionServiceTest extends TestCase
 {
     private $migrationDirectory = 'migrations';
@@ -45,6 +50,7 @@ final class MigrationVersionServiceTest extends TestCase
     {
         $this->migrationFinder
             ->expects(self::once())
+            ->method('findMigrations')
             ->with($this->migrationDirectory)
             ->willReturn([
                 '20190802110000' => 'path/to/file0',
@@ -60,17 +66,19 @@ final class MigrationVersionServiceTest extends TestCase
     {
         $this->migrationFinder
             ->expects(self::once())
+            ->method('findMigrations')
             ->with($this->migrationDirectory)
             ->willReturn(['20190802110000' => 'path/to/file0'])
         ;
 
-        self::assertSame('20190802110002', $this->migrationVersionService->getLastMigrationVersion());
+        self::assertSame('20190802110000', $this->migrationVersionService->getLastMigrationVersion());
     }
 
     public function testGetLastMigrationVersionForEmptyMigrations(): void
     {
         $this->migrationFinder
             ->expects(self::once())
+            ->method('findMigrations')
             ->with($this->migrationDirectory)
             ->willReturn([])
         ;
