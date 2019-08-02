@@ -1,5 +1,5 @@
 {
-    "name": "stflacon-studio/doctrine-redis-cache-bundle",
+    "name": "stfalcon-studio/doctrine-redis-cache-bundle",
     "description": "Custom implementation of Predis cache provider for Doctrine cache.",
     "keywords": ["bundle", "symfony", "doctrine", "cache", "redis"],
     "homepage": "https://github.com/stfalcon-studio/DoctrineRedisCacheBundle",
