@@ -2,7 +2,7 @@
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
- * (c) Stfalcon Studio <stfalcon.com>
+ * (c) Stfalcon LLC <stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,8 +21,10 @@ use Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface;
  */
 class MigrationVersionService
 {
+    /** @var string */
     private $migrationDirectory;
 
+    /** @var MigrationFinderInterface */
     private $migrationFinder;
 
     /**
