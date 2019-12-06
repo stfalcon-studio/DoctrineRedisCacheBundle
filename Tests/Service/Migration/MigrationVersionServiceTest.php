@@ -2,7 +2,7 @@
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
- * (c) Stfalcon Studio <stfalcon.com>
+ * (c) Stfalcon LLC <stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\Service\Migration;
 
-use Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface;
+use Doctrine\Migrations\Finder\MigrationFinder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
@@ -26,7 +26,7 @@ final class MigrationVersionServiceTest extends TestCase
 {
     private $migrationDirectory = 'migrations';
 
-    /** @var MigrationFinderInterface|MockObject */
+    /** @var MigrationFinder|MockObject */
     private $migrationFinder;
 
     /** @var MigrationVersionService */
@@ -34,7 +34,7 @@ final class MigrationVersionServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->migrationFinder = $this->createMock(MigrationFinderInterface::class);
+        $this->migrationFinder = $this->createMock(MigrationFinder::class);
         $this->migrationVersionService = new MigrationVersionService($this->migrationDirectory, $this->migrationFinder);
     }
 

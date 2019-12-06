@@ -11,4 +11,3 @@ services:
 
     Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface:
         class: Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder
-

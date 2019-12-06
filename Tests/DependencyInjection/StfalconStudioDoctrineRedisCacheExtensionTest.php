@@ -2,7 +2,7 @@
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
- * (c) Stfalcon Studio <stfalcon.com>
+ * (c) Stfalcon LLC <stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection;
 
 use Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface;
-use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\StfalconStudioDoctrineRedisCacheExtension;
 use PHPUnit\Framework\TestCase;
+use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\StfalconStudioDoctrineRedisCacheExtension;
 use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;

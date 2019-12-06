@@ -2,7 +2,7 @@
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
- * (c) Stfalcon Studio <stfalcon.com>
+ * (c) Stfalcon LLC <stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,8 +23,10 @@ use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionSe
  */
 class PredisCache extends BasePredisCache
 {
+    /** @var MigrationVersionService */
     private $migrationVersionService;
 
+    /** @var int */
     private $defaultLifeTime;
 
     /** @var string|null */

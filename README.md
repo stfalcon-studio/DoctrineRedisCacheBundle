@@ -1,6 +1,6 @@
 # DoctrineRedisCacheBundle
 
-Custom implementation of Predis cache provider for Doctrine cache.
+:package: Custom implementation of Predis cache provider for Doctrine cache.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/DoctrineRedisCacheBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/stfalcon-studio/DoctrineRedisCacheBundle/)
 [![Build Status](https://img.shields.io/travis/stfalcon-studio/DoctrineRedisCacheBundle/master.svg?style=flat-square)](https://travis-ci.org/stfalcon-studio/DoctrineRedisCacheBundle)
@@ -27,7 +27,7 @@ After that you can stop or rerun old script. And after rerun they will use a new
 
 ## Installation
 
-```composer req stfalcon-studio/doctrine-redis-cache-bundle='~1.0'```
+```composer req stfalcon-studio/doctrine-redis-cache-bundle='~1.1'```
 
 #### Check the `config/bundles.php` file
 
