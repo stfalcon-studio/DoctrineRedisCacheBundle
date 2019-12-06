@@ -8,12 +8,11 @@
  * file that was distributed with this source code.
  */
 
-
 declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection;
 
-use Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface;
+use Doctrine\Migrations\Finder\MigrationFinder;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\StfalconStudioDoctrineRedisCacheExtension;
 use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
@@ -52,14 +51,14 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
         $this->container->compile();
 
         self::assertArrayHasKey(MigrationVersionService::class, $this->container->getRemovedIds());
-        self::assertArrayHasKey(MigrationFinderInterface::class, $this->container->getRemovedIds());
+        self::assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
 
         self::assertArrayNotHasKey(MigrationVersionService::class, $this->container->getDefinitions());
-        self::assertArrayNotHasKey(MigrationFinderInterface::class, $this->container->getDefinitions());
+        self::assertArrayNotHasKey(MigrationFinder::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
 
         $this->container->get(MigrationVersionService::class);
-        $this->container->get(MigrationFinderInterface::class);
+        $this->container->get(MigrationFinder::class);
     }
 }
