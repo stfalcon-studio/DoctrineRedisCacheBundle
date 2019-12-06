@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle\Service\Migration;
 
-use Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface;
+use Doctrine\Migrations\Finder\MigrationFinder;
 
 /**
  * MigrationVersionService.
@@ -24,14 +24,14 @@ class MigrationVersionService
     /** @var string */
     private $migrationDirectory;
 
-    /** @var MigrationFinderInterface */
+    /** @var MigrationFinder */
     private $migrationFinder;
 
     /**
-     * @param string                   $migrationDirectory
-     * @param MigrationFinderInterface $migrationFinder
+     * @param string          $migrationDirectory
+     * @param MigrationFinder $migrationFinder
      */
-    public function __construct(string $migrationDirectory, MigrationFinderInterface $migrationFinder)
+    public function __construct(string $migrationDirectory, MigrationFinder $migrationFinder)
     {
         $this->migrationDirectory = $migrationDirectory;
         $this->migrationFinder = $migrationFinder;
