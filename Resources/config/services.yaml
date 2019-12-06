@@ -9,5 +9,5 @@ services:
     StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService:
         class: StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService
 
-    Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface:
-        class: Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder
+    Doctrine\Migrations\Finder\MigrationFinder:
+        class: Doctrine\Migrations\Finder\RecursiveRegexFinder
