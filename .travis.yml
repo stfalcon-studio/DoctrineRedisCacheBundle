@@ -11,11 +11,9 @@ env:
   - SYMFONY_VERSION=4.4.*
 
 before_install:
+  - echo "extension=redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer self-update
   - composer require --no-update symfony/symfony "$SYMFONY_VERSION"
-  
-before_script:
-  - echo "extension=redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
   - composer install --no-interaction --prefer-dist
