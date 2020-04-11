@@ -27,7 +27,7 @@ After that you can stop or rerun old script. And after rerun they will use a new
 
 ## Installation
 
-```composer req stfalcon-studio/doctrine-redis-cache-bundle='~1.1'```
+```composer req stfalcon-studio/doctrine-redis-cache-bundle='~1.2'```
 
 #### Check the `config/bundles.php` file
 

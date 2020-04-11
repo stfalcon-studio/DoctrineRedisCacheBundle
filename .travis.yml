@@ -3,12 +3,12 @@ language: php
 sudo: false
 
 php:
-  - '7.2'
   - '7.3'
   - '7.4'
 
 env:
   - SYMFONY_VERSION=4.4.*
+  - SYMFONY_VERSION=5.0.*
 
 before_install:
   - echo "extension=redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
@@ -21,7 +21,7 @@ install:
 script:
   - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
   - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
-  - ./vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon ./
+  - ./vendor/bin/phpstan analyse -l 8 --no-progress -c phpstan.neon ./
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
