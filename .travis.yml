@@ -55,6 +55,7 @@ jobs:
         - php ocular.phar code-coverage:upload --format=php-clover coverage.xml
 
 before_install:
+  - echo "extension=redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer self-update
   - composer require --no-update symfony/symfony "$SYMFONY_VERSION"
   - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
