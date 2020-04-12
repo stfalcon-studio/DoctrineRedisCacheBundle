@@ -135,7 +135,7 @@ class PredisCache extends BasePredisCache
     private function getModifiedKeysWithMigrationPrefix(array $keys): array
     {
         return \array_map(
-            function ($key) {
+            function (string $key) {
                 return $this->getModifiedKeyWithMigrationPrefix($key);
             },
             $keys
