@@ -50,7 +50,7 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        self::assertArrayHasKey('20200101000001', $this->container->getParameter('cache_prefix_seed'));
+        self::assertSame('20200101000001', $this->container->getParameter('cache_prefix_seed'));
 
         self::assertArrayHasKey(MigrationVersionService::class, $this->container->getRemovedIds());
         self::assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
@@ -70,6 +70,6 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        self::assertArrayHasKey('0', $this->container->getParameter('cache_prefix_seed'));
+        self::assertSame('0', $this->container->getParameter('cache_prefix_seed'));
     }
 }
