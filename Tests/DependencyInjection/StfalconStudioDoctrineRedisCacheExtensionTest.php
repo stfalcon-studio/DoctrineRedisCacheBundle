@@ -66,7 +66,7 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 
     public function testLoadExtensionWithNotMigration(): void
     {
-        $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations\empty');
+        $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations'.\DIRECTORY_SEPARATOR.'empty');
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
