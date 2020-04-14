@@ -46,9 +46,11 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 
     public function testLoadExtension(): void
     {
-        $this->container->setParameter('doctrine_migrations.dir_name', []); // Just add a dummy required parameter
+        $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations');
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
+
+        self::assertSame('20200101000001', $this->container->getParameter('cache_prefix_seed'));
 
         self::assertArrayHasKey(MigrationVersionService::class, $this->container->getRemovedIds());
         self::assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
@@ -60,5 +62,14 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 
         $this->container->get(MigrationVersionService::class);
         $this->container->get(MigrationFinder::class);
+    }
+
+    public function testLoadExtensionWithNotMigration(): void
+    {
+        $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations'.\DIRECTORY_SEPARATOR.'empty');
+        $this->container->loadFromExtension($this->extension->getAlias());
+        $this->container->compile();
+
+        self::assertSame('0', $this->container->getParameter('cache_prefix_seed'));
     }
 }
