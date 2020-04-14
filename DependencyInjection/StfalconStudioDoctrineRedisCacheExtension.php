@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection;
 
+use Doctrine\Migrations\Finder\RecursiveRegexFinder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -24,6 +25,17 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class StfalconStudioDoctrineRedisCacheExtension extends Extension
 {
+    /** @var RecursiveRegexFinder */
+    private $migrationFinder;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->migrationFinder = new RecursiveRegexFinder();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,5 +43,22 @@ class StfalconStudioDoctrineRedisCacheExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
+
+        $container->setParameter('cache_prefix_seed', $this->getLastMigrationVersion($container->getParameter('doctrine_migrations.dir_name')));
+    }
+
+    /**
+     * @param string $dir
+     *
+     * @return string
+     */
+    public function getLastMigrationVersion(string $dir): string
+    {
+        $migrations = $this->migrationFinder->findMigrations($dir);
+
+        $versions = \array_keys($migrations);
+        $latest = \end($versions);
+
+        return false !== $latest ? (string) $latest : '0';
     }
 }
