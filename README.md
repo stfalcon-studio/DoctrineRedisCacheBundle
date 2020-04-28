@@ -10,8 +10,6 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/stfalcon-studio/doctrine-redis-cache-bundle.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/doctrine-redis-cache-bundle)
 [![StyleCI](https://styleci.io/repos/200188496/shield?style=flat-square)](https://styleci.io/repos/200188496)
 
-[![SymfonyInsight](https://insight.symfony.com/projects/c76a1cb8-0947-4fc2-8d65-a1a2e802a523/big.svg)](https://insight.symfony.com/projects/c76a1cb8-0947-4fc2-8d65-a1a2e802a523)
-
 ## Problem Solved By This Bundle
 
 When you use Redis as cache provider to store Doctrine _query/metadata/result/second level_ cache, Doctrine generates unique keys for each cache item.
