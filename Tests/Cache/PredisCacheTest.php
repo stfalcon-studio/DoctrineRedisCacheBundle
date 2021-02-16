@@ -216,7 +216,7 @@ final class PredisCacheTest extends TestCase
         $this->client
             ->expects(self::exactly(2))
             ->method('__call')
-            ->with(
+            ->withConsecutive(
                 [
                     self::equalTo('setex'),
                     self::equalTo(['[123]testA', 111, 's:6:"valueA";']),

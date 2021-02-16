@@ -11,14 +11,14 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist>
-            <directory>./</directory>
-            <exclude>
-                <directory>./Resources</directory>
-                <directory>./Tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+    <coverage includeUncoveredFiles="false">
+        <include>
+            <directory suffix=".php">./</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">./Resources</directory>
+            <directory suffix=".php">./Tests</directory>
+            <directory suffix=".php">./vendor</directory>
+        </exclude>
+    </coverage>
 </phpunit>
