@@ -61,8 +61,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('get'),
-                $this->equalTo(['[123]test'])
+                self::equalTo('get'),
+                self::equalTo(['[123]test'])
             )
         ;
 
@@ -75,8 +75,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('mget'),
-                $this->equalTo(['[123]testA', '[123]testB'])
+                self::equalTo('mget'),
+                self::equalTo(['[123]testA', '[123]testB'])
             )
             ->willReturn(['s:6:"valueA";', 's:6:"valueB";'])
         ;
@@ -90,8 +90,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('exists'),
-                $this->equalTo(['[123]test'])
+                self::equalTo('exists'),
+                self::equalTo(['[123]test'])
             )
         ;
 
@@ -104,8 +104,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('del'),
-                $this->equalTo(['[123]test'])
+                self::equalTo('del'),
+                self::equalTo(['[123]test'])
             )
         ;
 
@@ -118,8 +118,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('del'),
-                $this->equalTo([['[123]testA', '[123]testB']])
+                self::equalTo('del'),
+                self::equalTo([['[123]testA', '[123]testB']])
             )
         ;
 
@@ -132,8 +132,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('set'),
-                $this->equalTo(['[123]test', 's:5:"value";'])
+                self::equalTo('set'),
+                self::equalTo(['[123]test', 's:5:"value";'])
             )
         ;
 
@@ -146,8 +146,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('setex'),
-                $this->equalTo(['[123]test', 456, 's:5:"value";'])
+                self::equalTo('setex'),
+                self::equalTo(['[123]test', 456, 's:5:"value";'])
             )
         ;
 
@@ -162,8 +162,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('setex'),
-                $this->equalTo(['[123]test', 111, 's:5:"value";'])
+                self::equalTo('setex'),
+                self::equalTo(['[123]test', 111, 's:5:"value";'])
             )
         ;
 
@@ -173,19 +173,17 @@ final class PredisCacheTest extends TestCase
     public function testSaveMultipleWithTtl(): void
     {
         $this->client
-            ->expects(self::at(0))
+            ->expects(self::exactly(2))
             ->method('__call')
-            ->with(
-                $this->equalTo('setex'),
-                $this->equalTo(['[123]testA', 456, 's:6:"valueA";'])
-            )
-        ;
-        $this->client
-            ->expects(self::at(1))
-            ->method('__call')
-            ->with(
-                $this->equalTo('setex'),
-                $this->equalTo(['[123]testB', 456, 's:6:"valueB";'])
+            ->withConsecutive(
+                [
+                    self::equalTo('setex'),
+                    self::equalTo(['[123]testA', 456, 's:6:"valueA";']),
+                ],
+                [
+                    self::equalTo('setex'),
+                    self::equalTo(['[123]testB', 456, 's:6:"valueB";']),
+                ]
             )
         ;
 
@@ -198,8 +196,8 @@ final class PredisCacheTest extends TestCase
             ->expects(self::once())
             ->method('__call')
             ->with(
-                $this->equalTo('mset'),
-                $this->equalTo([
+                self::equalTo('mset'),
+                self::equalTo([
                     [
                         '[123]testA' => 's:6:"valueA";',
                         '[123]testB' => 's:6:"valueB";',
@@ -216,19 +214,17 @@ final class PredisCacheTest extends TestCase
         $this->predisCache = new PredisCacheWrapper($this->client, $this->migrationVersionService, 111);
 
         $this->client
-            ->expects(self::at(0))
+            ->expects(self::exactly(2))
             ->method('__call')
             ->with(
-                $this->equalTo('setex'),
-                $this->equalTo(['[123]testA', 111, 's:6:"valueA";'])
-            )
-        ;
-        $this->client
-            ->expects(self::at(1))
-            ->method('__call')
-            ->with(
-                $this->equalTo('setex'),
-                $this->equalTo(['[123]testB', 111, 's:6:"valueB";'])
+                [
+                    self::equalTo('setex'),
+                    self::equalTo(['[123]testA', 111, 's:6:"valueA";']),
+                ],
+                [
+                    self::equalTo('setex'),
+                    self::equalTo(['[123]testB', 111, 's:6:"valueB";']),
+                ]
             )
         ;
 

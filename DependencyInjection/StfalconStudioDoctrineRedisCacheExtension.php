@@ -44,7 +44,7 @@ class StfalconStudioDoctrineRedisCacheExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
 
-        $container->setParameter('cache_prefix_seed', $this->getLastMigrationVersion($container->getParameter('doctrine_migrations.dir_name')));
+        $container->setParameter('cache_prefix_seed', $this->getLastMigrationVersion((string) $container->getParameter('doctrine_migrations.dir_name')));
     }
 
     /**
