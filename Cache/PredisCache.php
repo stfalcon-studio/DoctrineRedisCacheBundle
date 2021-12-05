@@ -23,14 +23,11 @@ use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionSe
  */
 class PredisCache extends BasePredisCache
 {
-    /** @var MigrationVersionService */
-    private $migrationVersionService;
+    private MigrationVersionService $migrationVersionService;
 
-    /** @var int */
-    private $defaultLifeTime;
+    private int $defaultLifeTime;
 
-    /** @var string|null */
-    private $lastMigrationVersion;
+    private ?string $lastMigrationVersion = null;
 
     /**
      * @param ClientInterface         $client

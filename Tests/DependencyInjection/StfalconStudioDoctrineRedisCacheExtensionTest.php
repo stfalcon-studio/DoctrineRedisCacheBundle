@@ -26,11 +26,8 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  */
 class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 {
-    /** @var StfalconStudioDoctrineRedisCacheExtension */
-    private $extension;
-
-    /** @var ContainerBuilder */
-    private $container;
+    private StfalconStudioDoctrineRedisCacheExtension $extension;
+    private ContainerBuilder $container;
 
     protected function setUp(): void
     {

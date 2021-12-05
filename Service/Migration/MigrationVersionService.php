@@ -21,11 +21,8 @@ use Doctrine\Migrations\Finder\MigrationFinder;
  */
 class MigrationVersionService
 {
-    /** @var string */
-    private $migrationDirectory;
-
-    /** @var MigrationFinder */
-    private $migrationFinder;
+    private string $migrationDirectory;
+    private MigrationFinder $migrationFinder;
 
     /**
      * @param string          $migrationDirectory

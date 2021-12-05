@@ -30,8 +30,7 @@ final class PredisCacheTest extends TestCase
     /** @var MigrationVersionService|MockObject */
     private $migrationVersionService;
 
-    /** @var PredisCacheWrapper */
-    private $predisCache;
+    private PredisCacheWrapper $predisCache;
 
     protected function setUp(): void
     {

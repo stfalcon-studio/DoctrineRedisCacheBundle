@@ -25,8 +25,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class StfalconStudioDoctrineRedisCacheExtension extends Extension
 {
-    /** @var RecursiveRegexFinder */
-    private $migrationFinder;
+    private RecursiveRegexFinder $migrationFinder;
 
     /**
      * Constructor.

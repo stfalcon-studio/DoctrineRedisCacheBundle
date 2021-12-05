@@ -24,13 +24,12 @@ use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionSe
  */
 final class MigrationVersionServiceTest extends TestCase
 {
-    private $migrationDirectory = 'migrations';
+    private string $migrationDirectory = 'migrations';
 
     /** @var MigrationFinder|MockObject */
     private $migrationFinder;
 
-    /** @var MigrationVersionService */
-    private $migrationVersionService;
+    private MigrationVersionService $migrationVersionService;
 
     protected function setUp(): void
     {
