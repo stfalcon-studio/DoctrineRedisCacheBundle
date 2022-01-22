@@ -19,7 +19,7 @@
         "php": ">=7.4",
         "ext-redis": "*",
         "doctrine/cache": "^1.12",
-        "doctrine/doctrine-migrations-bundle": "^3.0",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
         "predis/predis": "^1.1",
         "symfony/config": "^5.4",
         "symfony/dependency-injection": "^5.4",
@@ -36,7 +36,7 @@
         "phpstan/phpstan-phpunit": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5",
-        "slam/phpstan-extensions": "^6.0",
+        "slam/phpstan-extensions": "^5.1",
         "thecodingmachine/phpstan-strict-rules": "^1.0"
     },
     "autoload": {
