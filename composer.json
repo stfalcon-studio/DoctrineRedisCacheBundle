@@ -33,7 +33,7 @@
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
         "phpunit/phpunit": "^9.5",
-        "slam/phpstan-extensions": "^4.0",
+        "slam/phpstan-extensions": "^5.1",
         "thecodingmachine/phpstan-strict-rules": "^0.12"
     },
     "autoload": {
