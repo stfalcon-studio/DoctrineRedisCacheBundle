@@ -29,13 +29,11 @@
     },
     "require-dev": {
         "escapestudios/symfony2-coding-standard": "^3.12",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-deprecation-rules": "^0.12",
-        "phpstan/phpstan-doctrine": "^0.12",
-        "phpstan/phpstan-phpunit": "^0.12",
-        "phpunit/phpunit": "^9.5",
-        "slam/phpstan-extensions": "^5.1",
-        "thecodingmachine/phpstan-strict-rules": "^0.12"
+        "phpstan/phpstan": "^1.2",
+        "phpstan/phpstan-doctrine": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-symfony": "^1.0",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {

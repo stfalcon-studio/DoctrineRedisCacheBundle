@@ -34,7 +34,7 @@ class PredisCache extends BasePredisCache
      * @param MigrationVersionService $migrationVersionService
      * @param int                     $defaultLifeTime
      */
-    public function __construct(ClientInterface $client, MigrationVersionService $migrationVersionService, $defaultLifeTime = 0)
+    public function __construct(ClientInterface $client, MigrationVersionService $migrationVersionService, int $defaultLifeTime = 0)
     {
         parent::__construct($client);
 

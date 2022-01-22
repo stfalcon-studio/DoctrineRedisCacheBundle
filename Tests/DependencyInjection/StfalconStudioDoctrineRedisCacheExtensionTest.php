@@ -38,7 +38,10 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->extension, $this->container);
+        unset(
+            $this->extension,
+            $this->container,
+        );
     }
 
     public function testLoadExtension(): void
@@ -61,7 +64,7 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
         $this->container->get(MigrationFinder::class);
     }
 
-    public function testLoadExtensionWithNotMigration(): void
+    public function testLoadExtensionWithNoMigration(): void
     {
         $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations'.\DIRECTORY_SEPARATOR.'empty');
         $this->container->loadFromExtension($this->extension->getAlias());
