@@ -67,6 +67,13 @@ final class DetectLastMigrationPassTest extends TestCase
         $this->configuration->addMigrationsDirectory('TestMigrations', __DIR__.'../../Migrations');
         $this->configuration->addMigrationClass(Version20200101000003::class);
 
+        $this->migrationFinder
+            ->expects(self::once())
+            ->method('findMigrations')
+            ->with('TestMigrations', __DIR__.'../../Migrations')
+            ->willReturn(['Version20200101000001', 'Version20200101000002'])
+        ;
+
         $this->container
             ->expects(self::once())
             ->method('setParameter')
