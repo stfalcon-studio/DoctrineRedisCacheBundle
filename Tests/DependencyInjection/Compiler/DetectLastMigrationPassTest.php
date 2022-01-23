@@ -19,6 +19,7 @@ use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\Compiler\DetectLastMigrationPass;
 use StfalconStudio\DoctrineRedisCacheBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * DetectLastMigrationPassTest.
@@ -76,8 +77,37 @@ final class DetectLastMigrationPassTest extends TestCase
 
         $this->container
             ->expects(self::once())
-            ->method('setParameter')
-            ->with('cache.prefix.seed', 'Version20200101000003')
+            ->method('hasParameter')
+            ->with('doctrine_redis_cache.cache_pools')
+            ->willReturn(true)
+        ;
+
+        $this->container
+            ->expects(self::once())
+            ->method('getParameter')
+            ->with('doctrine_redis_cache.cache_pools')
+            ->willReturn(['foo'])
+        ;
+
+        $definition = $this->createMock(Definition::class);
+
+        $this->container
+            ->expects(self::once())
+            ->method('getDefinition')
+            ->with('foo')
+            ->willReturn($definition)
+        ;
+
+        $definition
+            ->expects(self::once())
+            ->method('getTags')
+            ->willReturn([])
+        ;
+
+        $definition
+            ->expects(self::once())
+            ->method('setTags')
+            ->willReturn(['cache.pool' => ['namespace' => 'Version20200101000003']])
         ;
 
         $this->detectLastMigrationPass->process($this->container);

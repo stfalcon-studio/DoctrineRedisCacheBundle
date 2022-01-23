@@ -48,7 +48,7 @@ final class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        self::assertSame('0', $this->container->getParameter('cache_prefix_seed'));
+        self::assertSame([], $this->container->getParameter('doctrine_redis_cache.cache_pools'));
         self::assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
         self::assertArrayNotHasKey(MigrationFinder::class, $this->container->getDefinitions());
 

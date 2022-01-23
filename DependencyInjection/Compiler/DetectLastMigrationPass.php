@@ -61,8 +61,20 @@ final class DetectLastMigrationPass implements CompilerPassInterface
         \sort($processedMigrations); // Sort by name
         $latest = \end($processedMigrations);
 
-        if (false !== $latest) {
-            $container->setParameter('cache.prefix.seed', (string) $latest);
+        $cachePools = [];
+        if ($container->hasParameter('doctrine_redis_cache.cache_pools')) {
+            $cachePools = (array) $container->getParameter('doctrine_redis_cache.cache_pools');
+        }
+
+        if (false !== $latest && !empty($cachePools)) {
+            $latestMigration = (string) $latest;
+
+            foreach ($cachePools as $cachePool) {
+                $definition = $container->getDefinition($cachePool);
+                $tags = $definition->getTags();
+                $tags['cache.pool'][0]['namespace'] = $latestMigration;
+                $definition->setTags($tags);
+            }
         }
     }
 }

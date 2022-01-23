@@ -29,9 +29,11 @@ class StfalconStudioDoctrineRedisCacheExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('doctrine_redis_cache.cache_pools', $config['cache_pools']);
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
-
-        $container->setParameter('cache_prefix_seed', '0');
     }
 }
