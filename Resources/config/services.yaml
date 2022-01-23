@@ -4,10 +4,7 @@ services:
         autoconfigure: true
         public: false
         bind:
-            $migrationDirectory: "%doctrine_migrations.dir_name%"
-
-    StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService:
-        class: StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService
+            $cachePrefixSeed: "%cache_prefix_seed%"
 
     Doctrine\Migrations\Finder\MigrationFinder:
         class: Doctrine\Migrations\Finder\RecursiveRegexFinder

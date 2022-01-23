@@ -15,7 +15,6 @@ namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\Cache;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Predis\ClientInterface;
-use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
 
 /**
  * PredisCacheTest.
@@ -27,22 +26,13 @@ final class PredisCacheTest extends TestCase
     /** @var ClientInterface|MockObject */
     private $client;
 
-    /** @var MigrationVersionService|MockObject */
-    private $migrationVersionService;
-
     private PredisCacheWrapper $predisCache;
 
     protected function setUp(): void
     {
         $this->client = $this->createMock(ClientInterface::class);
-        $this->migrationVersionService = $this->createMock(MigrationVersionService::class);
-        $this->migrationVersionService
-            ->expects(self::once())
-            ->method('getLastMigrationVersion')
-            ->willReturn('123')
-        ;
 
-        $this->predisCache = new PredisCacheWrapper($this->client, $this->migrationVersionService);
+        $this->predisCache = new PredisCacheWrapper($this->client, '123');
     }
 
     protected function tearDown(): void
@@ -155,7 +145,7 @@ final class PredisCacheTest extends TestCase
 
     public function testSaveWithCustomDefaultTtl(): void
     {
-        $this->predisCache = new PredisCacheWrapper($this->client, $this->migrationVersionService, 111);
+        $this->predisCache = new PredisCacheWrapper($this->client, '123', 111);
 
         $this->client
             ->expects(self::once())
@@ -210,7 +200,7 @@ final class PredisCacheTest extends TestCase
 
     public function testSaveMultipleWithCustomTtl(): void
     {
-        $this->predisCache = new PredisCacheWrapper($this->client, $this->migrationVersionService, 111);
+        $this->predisCache = new PredisCacheWrapper($this->client, '123', 111);
 
         $this->client
             ->expects(self::exactly(2))

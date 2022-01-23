@@ -14,7 +14,6 @@ namespace StfalconStudio\DoctrineRedisCacheBundle\Cache;
 
 use Doctrine\Common\Cache\PredisCache as BasePredisCache;
 use Predis\ClientInterface;
-use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
 
 /**
  * PredisCache.
@@ -23,22 +22,20 @@ use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionSe
  */
 class PredisCache extends BasePredisCache
 {
-    private MigrationVersionService $migrationVersionService;
+    private string $cachePrefixSeed;
 
     private int $defaultLifeTime;
 
-    private ?string $lastMigrationVersion = null;
-
     /**
-     * @param ClientInterface         $client
-     * @param MigrationVersionService $migrationVersionService
-     * @param int                     $defaultLifeTime
+     * @param ClientInterface $client
+     * @param string          $cachePrefixSeed
+     * @param int             $defaultLifeTime
      */
-    public function __construct(ClientInterface $client, MigrationVersionService $migrationVersionService, int $defaultLifeTime = 0)
+    public function __construct(ClientInterface $client, string $cachePrefixSeed, int $defaultLifeTime = 0)
     {
         parent::__construct($client);
 
-        $this->migrationVersionService = $migrationVersionService;
+        $this->cachePrefixSeed = $cachePrefixSeed;
         $this->defaultLifeTime = $defaultLifeTime;
     }
 
@@ -111,20 +108,6 @@ class PredisCache extends BasePredisCache
     }
 
     /**
-     * @param string $key
-     *
-     * @return string
-     */
-    private function getModifiedKeyWithMigrationPrefix(string $key): string
-    {
-        if (null === $this->lastMigrationVersion) {
-            $this->lastMigrationVersion = $this->migrationVersionService->getLastMigrationVersion();
-        }
-
-        return \sprintf('[%s]%s', $this->lastMigrationVersion, $key);
-    }
-
-    /**
      * @param array $keys
      *
      * @return array
@@ -152,5 +135,15 @@ class PredisCache extends BasePredisCache
         }
 
         return $result;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    private function getModifiedKeyWithMigrationPrefix(string $key): string
+    {
+        return \sprintf('[%s]%s', $this->cachePrefixSeed, $key);
     }
 }
