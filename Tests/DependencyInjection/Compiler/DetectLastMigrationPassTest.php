@@ -17,6 +17,7 @@ use Doctrine\Migrations\Finder\MigrationFinder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\Compiler\DetectLastMigrationPass;
+use StfalconStudio\DoctrineRedisCacheBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -71,6 +72,34 @@ final class DetectLastMigrationPassTest extends TestCase
             ->method('setParameter')
             ->with('cache.prefix.seed', 'Version20200101000003')
         ;
+
+        $this->detectLastMigrationPass->process($this->container);
+    }
+
+    public function testProcessMissingMigrationFinder(): void
+    {
+        $this->container
+            ->expects(self::once())
+            ->method('get')
+            ->with(MigrationFinder::class)
+            ->willReturn(null)
+        ;
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->detectLastMigrationPass->process($this->container);
+    }
+
+    public function testProcessMissingMigrationsConfiguration(): void
+    {
+        $this->container
+            ->expects(self::exactly(2))
+            ->method('get')
+            ->withConsecutive([MigrationFinder::class], ['doctrine.migrations.configuration'])
+            ->willReturnOnConsecutiveCalls($this->migrationFinder, null)
+        ;
+
+        $this->expectException(InvalidArgumentException::class);
 
         $this->detectLastMigrationPass->process($this->container);
     }
