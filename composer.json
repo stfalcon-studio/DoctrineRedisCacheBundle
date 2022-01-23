@@ -1,7 +1,7 @@
 {
     "name": "stfalcon-studio/doctrine-redis-cache-bundle",
-    "description": "Custom implementation of Predis cache provider for Doctrine cache.",
-    "keywords": ["bundle", "symfony", "doctrine", "cache", "redis", "predis"],
+    "description": "Add custom namespace for doctrine cache pools.",
+    "keywords": ["bundle", "symfony", "doctrine", "cache", "cache pool", "redis"],
     "homepage": "https://github.com/stfalcon-studio/DoctrineRedisCacheBundle",
     "type": "symfony-bundle",
     "license": "MIT",
@@ -19,7 +19,6 @@
         "php": ">=7.4",
         "ext-redis": "*",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "predis/predis": "^1.1",
         "symfony/cache": "^5.4",
         "symfony/config": "^5.4",
         "symfony/dependency-injection": "^5.4",
