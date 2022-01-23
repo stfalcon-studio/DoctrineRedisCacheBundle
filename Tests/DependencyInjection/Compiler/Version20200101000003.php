@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\Migrations;
+namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection\Compiler;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -18,7 +18,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Blank migration.
  */
-final class Version20200101000001 extends AbstractMigration
+final class Version20200101000003 extends AbstractMigration
 {
     /**
      * @param Schema $schema

@@ -15,7 +15,6 @@ namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection;
 use Doctrine\Migrations\Finder\MigrationFinder;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\StfalconStudioDoctrineRedisCacheExtension;
-use StfalconStudio\DoctrineRedisCacheBundle\Service\Migration\MigrationVersionService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
@@ -24,13 +23,10 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
+final class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 {
-    /** @var StfalconStudioDoctrineRedisCacheExtension */
-    private $extension;
-
-    /** @var ContainerBuilder */
-    private $container;
+    private StfalconStudioDoctrineRedisCacheExtension $extension;
+    private ContainerBuilder $container;
 
     protected function setUp(): void
     {
@@ -41,35 +37,23 @@ class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->extension, $this->container);
+        unset(
+            $this->extension,
+            $this->container,
+        );
     }
 
     public function testLoadExtension(): void
     {
-        $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations');
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        self::assertSame('20200101000001', $this->container->getParameter('cache_prefix_seed'));
-
-        self::assertArrayHasKey(MigrationVersionService::class, $this->container->getRemovedIds());
+        self::assertSame([], $this->container->getParameter('doctrine_redis_cache.cache_pools'));
         self::assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
-
-        self::assertArrayNotHasKey(MigrationVersionService::class, $this->container->getDefinitions());
         self::assertArrayNotHasKey(MigrationFinder::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
 
-        $this->container->get(MigrationVersionService::class);
         $this->container->get(MigrationFinder::class);
-    }
-
-    public function testLoadExtensionWithNotMigration(): void
-    {
-        $this->container->setParameter('doctrine_migrations.dir_name', __DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'Migrations'.\DIRECTORY_SEPARATOR.'empty');
-        $this->container->loadFromExtension($this->extension->getAlias());
-        $this->container->compile();
-
-        self::assertSame('0', $this->container->getParameter('cache_prefix_seed'));
     }
 }

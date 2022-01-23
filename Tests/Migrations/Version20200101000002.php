@@ -18,7 +18,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Blank migration.
  */
-final class Version20200101000001 extends AbstractMigration
+final class Version20200101000002 extends AbstractMigration
 {
     /**
      * @param Schema $schema

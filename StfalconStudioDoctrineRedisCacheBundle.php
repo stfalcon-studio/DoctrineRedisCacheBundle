@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle;
 
+use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\Compiler\DetectLastMigrationPass;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -21,4 +24,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class StfalconStudioDoctrineRedisCacheBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new DetectLastMigrationPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 33);
+    }
 }

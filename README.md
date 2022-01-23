@@ -25,7 +25,7 @@ After that you can stop or rerun old script. And after rerun they will use a new
 
 ## Installation
 
-```composer req stfalcon-studio/doctrine-redis-cache-bundle='~1.3'```
+```composer req stfalcon-studio/doctrine-redis-cache-bundle```
 
 #### Check the `config/bundles.php` file
 
@@ -40,16 +40,6 @@ return [
     StfalconStudio\DoctrineRedisCacheBundle\StfalconStudioDoctrineRedisCacheBundle::class => ['all' => true],
     // Other bundles...
 ];
-```
-
-#### Override `PredisCache` service with custom implementation
-
-Open the file `config/services.yaml` and add there next lines under the `services` section:
-
-```yaml
-services:
-    doctrine_cache.abstract.predis:
-        class: StfalconStudio\DoctrineRedisCacheBundle\Cache\PredisCache
 ```
 
 ## Contributing
