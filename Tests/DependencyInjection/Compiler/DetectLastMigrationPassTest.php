@@ -69,7 +69,7 @@ final class DetectLastMigrationPassTest extends TestCase
         $this->container
             ->expects(self::once())
             ->method('setParameter')
-            ->with('cache_prefix_seed', 'Version20200101000003')
+            ->with('cache.prefix.seed', 'Version20200101000003')
         ;
 
         $this->detectLastMigrationPass->process($this->container);

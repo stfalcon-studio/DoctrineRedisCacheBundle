@@ -62,7 +62,7 @@ final class DetectLastMigrationPass implements CompilerPassInterface
         $latest = \end($processedMigrations);
 
         if (false !== $latest) {
-            $container->setParameter('cache_prefix_seed', (string) $latest);
+            $container->setParameter('cache.prefix.seed', (string) $latest);
         }
     }
 }

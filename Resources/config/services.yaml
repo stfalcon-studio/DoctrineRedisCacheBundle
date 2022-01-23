@@ -3,8 +3,6 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-        bind:
-            $cachePrefixSeed: "%cache_prefix_seed%"
 
     Doctrine\Migrations\Finder\MigrationFinder:
         class: Doctrine\Migrations\Finder\RecursiveRegexFinder
