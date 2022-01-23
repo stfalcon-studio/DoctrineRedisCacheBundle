@@ -1,6 +1,6 @@
 # DoctrineRedisCacheBundle
 
-:package: Custom implementation of Predis cache provider for Doctrine cache.
+:package: Add custom namespace for doctrine cache pools.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/DoctrineRedisCacheBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/stfalcon-studio/DoctrineRedisCacheBundle/)
 [![Build Status](https://img.shields.io/travis/stfalcon-studio/DoctrineRedisCacheBundle/master.svg?style=flat-square)](https://travis-ci.org/stfalcon-studio/DoctrineRedisCacheBundle)
@@ -17,7 +17,7 @@ When you change your database schema, create a new migration (Doctrine migration
 Doctrine has console commands to clean any type of cache and they work well. But if during the cache flushing, you have already running script (long running console/cron task or consumer) it still uses old schema info which can conflict with your new schema.
 In this case this script can regenerate cache (because it has been already flushed) with old schema metadata, query, result etc.
 
-To prevent this problem, we modified `PredisCache` class from Doctrine Cache library and added a **prefix** to keys which are used by Doctrine. This **prefix** is a NUMBER of the last migration version.
+To prevent this problem, we add a custom **namespace** for each selected cache pool. This **namespace** is a name of the last migration version.
 For example, you deploy the first version of your project to production. Last migration version is `1` so all keys in cache will have prefix `[1]` (e.g. `[1]hash_by_doctrine`).
 Then you modify your schema, generate a new migration (version `2`) and deploy it to production. Old running script will still use and generate keys with prefix `[1]`, but new scripts will begin to use fresh prefix `[2]` and don't conflict with previous prefix.
 
@@ -40,6 +40,35 @@ return [
     StfalconStudio\DoctrineRedisCacheBundle\StfalconStudioDoctrineRedisCacheBundle::class => ['all' => true],
     // Other bundles...
 ];
+```
+
+### Example of possible cache pool configuration
+
+```yaml
+framework:
+    cache:
+        default_redis_provider: snc_redis.default
+        pools:
+            doctrine.result_cache_pool:
+                adapter: cache.adapter.redis
+                provider: snc_redis.doctrine_result_cache
+            doctrine.metadata_cache_pool:
+                adapter: cache.adapter.redis
+                provider: snc_redis.doctrine_metadata_cache
+            doctrine.query_cache_pool:
+                adapter: cache.adapter.redis
+                provider: snc_redis.doctrine_query_cache
+```
+
+### Bundle configuration
+
+```yaml
+stfalcon_studio_doctrine_redis_cache:
+    cache_pools:
+        - 'doctrine.query_cache_pool'
+        - 'doctrine.metadata_cache_pool'
+        - 'doctrine.result_cache_pool'
+
 ```
 
 ## Contributing
