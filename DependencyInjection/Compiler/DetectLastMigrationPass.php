@@ -14,7 +14,7 @@ namespace StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\Compiler;
 
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Finder\MigrationFinder;
-use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
+use StfalconStudio\DoctrineRedisCacheBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

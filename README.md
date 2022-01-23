@@ -42,16 +42,6 @@ return [
 ];
 ```
 
-#### Override `PredisCache` service with custom implementation
-
-Open the file `config/services.yaml` and add there next lines under the `services` section:
-
-```yaml
-services:
-    doctrine_cache.abstract.predis:
-        class: StfalconStudio\DoctrineRedisCacheBundle\Cache\PredisCache
-```
-
 ## Contributing
 
 Read the [CONTRIBUTING](https://github.com/stfalcon-studio/DoctrineRedisCacheBundle/blob/master/.github/CONTRIBUTING.md) file.
