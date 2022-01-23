@@ -70,7 +70,7 @@ final class DetectLastMigrationPassTest extends TestCase
         $this->migrationFinder
             ->expects(self::once())
             ->method('findMigrations')
-            ->with('TestMigrations', __DIR__.'../../Migrations')
+            ->with(__DIR__.'../../Migrations')
             ->willReturn(['Version20200101000001', 'Version20200101000002'])
         ;
 
