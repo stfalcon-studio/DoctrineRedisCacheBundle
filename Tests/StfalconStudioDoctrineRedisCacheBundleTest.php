@@ -15,6 +15,7 @@ namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\Compiler\DetectLastMigrationPass;
 use StfalconStudio\DoctrineRedisCacheBundle\StfalconStudioDoctrineRedisCacheBundle;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -30,7 +31,7 @@ final class StfalconStudioDoctrineRedisCacheBundleTest extends TestCase
         $containerBuilder
             ->expects(self::once())
             ->method('addCompilerPass')
-            ->with(self::isInstanceOf(DetectLastMigrationPass::class))
+            ->with(self::isInstanceOf(DetectLastMigrationPass::class), PassConfig::TYPE_BEFORE_OPTIMIZATION, 33)
         ;
 
         $bundle = new StfalconStudioDoctrineRedisCacheBundle();
