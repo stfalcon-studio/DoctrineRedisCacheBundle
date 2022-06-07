@@ -107,7 +107,7 @@ final class DetectLastMigrationPassTest extends TestCase
         $definition
             ->expects(self::once())
             ->method('setTags')
-            ->with(['cache.pool' => ['namespace' => 'Version20200101000003']])
+            ->with(['cache.pool' => [['namespace' => 'Version20200101000003']]])
         ;
 
         $this->detectLastMigrationPass->process($this->container);
