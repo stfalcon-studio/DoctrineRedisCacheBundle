@@ -29,10 +29,10 @@ use Symfony\Component\DependencyInjection\Definition;
 final class DetectLastMigrationPassTest extends TestCase
 {
     /** @var MigrationFinder|MockObject */
-    private $migrationFinder;
+    private MigrationFinder|MockObject $migrationFinder;
 
     /** @var ContainerBuilder|MockObject */
-    private $container;
+    private ContainerBuilder|MockObject $container;
 
     private Configuration $configuration;
 
@@ -107,7 +107,7 @@ final class DetectLastMigrationPassTest extends TestCase
         $definition
             ->expects(self::once())
             ->method('setTags')
-            ->willReturn(['cache.pool' => ['namespace' => 'Version20200101000003']])
+            ->with(['cache.pool' => ['namespace' => 'Version20200101000003']])
         ;
 
         $this->detectLastMigrationPass->process($this->container);
