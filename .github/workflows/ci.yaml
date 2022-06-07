@@ -74,7 +74,7 @@ jobs:
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.1
           ini-values: memory_limit=-1
           coverage: none
           tools: composer:v2
@@ -94,11 +94,9 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '7.4'
-          - '8.0'
           - '8.1'
         symfony-version:
-          - '5.4'
+          - '6.1'
     steps:
       - name: 'Checkout Code'
         uses: actions/checkout@v2
