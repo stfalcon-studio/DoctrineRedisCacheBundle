@@ -1,8 +1,0 @@
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
-
-  Doctrine\Migrations\Finder\MigrationFinder:
-    class: Doctrine\Migrations\Finder\RecursiveRegexFinder
