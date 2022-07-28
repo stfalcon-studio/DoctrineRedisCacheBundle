@@ -14,7 +14,7 @@ namespace StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -33,7 +33,7 @@ class StfalconStudioDoctrineRedisCacheExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('doctrine_redis_cache.cache_pools', $config['cache_pools']);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yaml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.php');
     }
 }
