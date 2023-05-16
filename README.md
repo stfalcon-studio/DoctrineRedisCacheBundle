@@ -3,7 +3,7 @@
 :package: Add custom namespace for doctrine cache pools.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/DoctrineRedisCacheBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/stfalcon-studio/DoctrineRedisCacheBundle/)
-[![Build Status](https://img.shields.io/travis/stfalcon-studio/DoctrineRedisCacheBundle/master.svg?style=flat-square)](https://travis-ci.org/stfalcon-studio/DoctrineRedisCacheBundle)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/stfalcon-studio/DoctrineRedisCacheBundle/ci.yaml?branch=main&style=flat-square)](https://github.com/stfalcon-studio/DoctrineRedisCacheBundle/actions?query=workflow%3ACI+branch%3Amain+)
 [![CodeCov](https://img.shields.io/codecov/c/github/stfalcon-studio/DoctrineRedisCacheBundle.svg?style=flat-square)](https://codecov.io/github/stfalcon-studio/DoctrineRedisCacheBundle)
 [![License](https://img.shields.io/packagist/l/stfalcon-studio/doctrine-redis-cache-bundle.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/doctrine-redis-cache-bundle)
 [![Latest Stable Version](https://img.shields.io/packagist/v/stfalcon-studio/doctrine-redis-cache-bundle.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/doctrine-redis-cache-bundle)
