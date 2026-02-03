@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
@@ -52,14 +53,14 @@ final class DetectLastMigrationPass implements CompilerPassInterface
 
         $processedMigrations = [];
         foreach ($migrations as $migration) {
-            \preg_match('#Version.*#', $migration, $matches);
+            preg_match('#Version.*#', $migration, $matches);
             if (!empty($matches[0])) {
                 $processedMigrations[] = $matches[0];
             }
         }
 
-        \sort($processedMigrations); // Sort by name
-        $latest = \end($processedMigrations);
+        sort($processedMigrations); // Sort by name
+        $latest = end($processedMigrations);
 
         $cachePools = [];
         if ($container->hasParameter('doctrine_redis_cache.cache_pools')) {
