@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
@@ -52,27 +53,28 @@ final class DetectLastMigrationPass implements CompilerPassInterface
 
         $processedMigrations = [];
         foreach ($migrations as $migration) {
-            \preg_match('#Version.*#', $migration, $matches);
+            preg_match('#Version.*#', $migration, $matches);
             if (!empty($matches[0])) {
                 $processedMigrations[] = $matches[0];
             }
         }
 
-        \sort($processedMigrations); // Sort by name
-        $latest = \end($processedMigrations);
+        sort($processedMigrations); // Sort by name
+        $hash = '';
+        if (!empty($processedMigrations)) {
+            $hash = md5(implode('', $processedMigrations));
+        }
 
         $cachePools = [];
         if ($container->hasParameter('doctrine_redis_cache.cache_pools')) {
             $cachePools = (array) $container->getParameter('doctrine_redis_cache.cache_pools');
         }
 
-        if (false !== $latest && !empty($cachePools)) {
-            $latestMigration = (string) $latest;
-
+        if (!empty($hash) && !empty($cachePools)) {
             foreach ($cachePools as $cachePool) {
                 $definition = $container->getDefinition($cachePool);
                 $tags = $definition->getTags();
-                $tags['cache.pool'][0]['namespace'] = $latestMigration;
+                $tags['cache.pool'][0]['namespace'] = $hash;
                 $definition->setTags($tags);
             }
         }

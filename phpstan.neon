@@ -1,15 +1,23 @@
 includes:
     - 'vendor/phpstan/phpstan-phpunit/extension.neon'
     - 'vendor/phpstan/phpstan-phpunit/rules.neon'
-    - 'vendor/phpstan/phpstan-doctrine/extension.neon'
     - 'vendor/phpstan/phpstan-symfony/extension.neon'
 parameters:
-    level: 8
-    checkMissingIterableValueType: false
-    excludes_analyse:
-        - '%rootDir%/../../../DependencyInjection/Configuration'
+    level: 9
+    excludePaths:
         - '%rootDir%/../../../Tests/*'
-        - '%rootDir%/../../../tests/*'
         - '%rootDir%/../../../vendor/*'
     fileExtensions:
         - 'php'
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+            reportUnmatched: false
+        -
+            identifier: function.alreadyNarrowedType
+            reportUnmatched: false
+        -
+            identifier: instanceof.alwaysTrue
+            reportUnmatched: false

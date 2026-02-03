@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
@@ -12,6 +13,7 @@ declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\Compiler\DetectLastMigrationPass;
 use StfalconStudio\DoctrineRedisCacheBundle\StfalconStudioDoctrineRedisCacheBundle;
@@ -25,13 +27,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class StfalconStudioDoctrineRedisCacheBundleTest extends TestCase
 {
-    public function testBuild(): void
+    #[Test]
+    public function build(): void
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);
         $containerBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('addCompilerPass')
-            ->with(self::isInstanceOf(DetectLastMigrationPass::class), PassConfig::TYPE_BEFORE_OPTIMIZATION, 33)
+            ->with($this->isInstanceOf(DetectLastMigrationPass::class), PassConfig::TYPE_BEFORE_OPTIMIZATION, 33)
         ;
 
         $bundle = new StfalconStudioDoctrineRedisCacheBundle();

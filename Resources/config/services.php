@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
@@ -17,9 +18,11 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->defaults()
+    $services
+        ->defaults()
         ->autowire()
-        ->autoconfigure();
+        ->autoconfigure()
+    ;
 
     $services->set(MigrationFinder::class, RecursiveRegexFinder::class);
 };

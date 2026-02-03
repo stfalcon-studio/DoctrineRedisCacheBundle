@@ -1,0 +1,11 @@
+services:
+  stfalcon_studio_doctrine_redis_cache_bundle:
+    container_name: "stfalcon_studio_doctrine_redis_cache_bundle"
+    image: fresh-stfalcon_studio_doctrine_redis_cache_bundle-enum-bundle-php:1.0
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/var/www/bundle

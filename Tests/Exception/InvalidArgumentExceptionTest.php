@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
@@ -12,6 +13,7 @@ declare(strict_types=1);
 
 namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection\Exception;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\Exception\InvalidArgumentException;
 
@@ -22,10 +24,11 @@ use StfalconStudio\DoctrineRedisCacheBundle\Exception\InvalidArgumentException;
  */
 final class InvalidArgumentExceptionTest extends TestCase
 {
-    public function testConstructor(): void
+    #[Test]
+    public function constructor(): void
     {
         $exception = new InvalidArgumentException();
 
-        self::assertInstanceOf(\InvalidArgumentException::class, $exception);
+        $this->assertInstanceOf(\InvalidArgumentException::class, $exception);
     }
 }

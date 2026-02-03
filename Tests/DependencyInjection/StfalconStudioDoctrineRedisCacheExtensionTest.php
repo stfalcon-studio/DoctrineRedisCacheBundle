@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the StfalconStudioDoctrineRedisCacheBundle.
  *
@@ -13,6 +14,7 @@ declare(strict_types=1);
 namespace StfalconStudio\DoctrineRedisCacheBundle\Tests\DependencyInjection;
 
 use Doctrine\Migrations\Finder\MigrationFinder;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use StfalconStudio\DoctrineRedisCacheBundle\DependencyInjection\StfalconStudioDoctrineRedisCacheExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -43,14 +45,15 @@ final class StfalconStudioDoctrineRedisCacheExtensionTest extends TestCase
         );
     }
 
-    public function testLoadExtension(): void
+    #[Test]
+    public function loadExtension(): void
     {
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        self::assertSame([], $this->container->getParameter('doctrine_redis_cache.cache_pools'));
-        self::assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
-        self::assertArrayNotHasKey(MigrationFinder::class, $this->container->getDefinitions());
+        $this->assertSame([], $this->container->getParameter('doctrine_redis_cache.cache_pools'));
+        $this->assertArrayHasKey(MigrationFinder::class, $this->container->getRemovedIds());
+        $this->assertArrayNotHasKey(MigrationFinder::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
 
