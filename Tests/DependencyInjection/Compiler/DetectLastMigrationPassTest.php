@@ -33,11 +33,11 @@ final class DetectLastMigrationPassTest extends TestCase
 {
     use ConsecutiveParams;
 
-    /** @var MigrationFinder|MockObject */
-    private MigrationFinder|MockObject $migrationFinder;
+    /** @var MigrationFinder&MockObject */
+    private MigrationFinder&MockObject $migrationFinder;
 
-    /** @var ContainerBuilder|MockObject */
-    private ContainerBuilder|MockObject $container;
+    /** @var ContainerBuilder&MockObject */
+    private ContainerBuilder&MockObject $container;
 
     private Configuration $configuration;
 
